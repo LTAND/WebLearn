@@ -1,6 +1,8 @@
 const MyEmitter = require("events").EventEmitter; 
-
 let ev = new MyEmitter()
+
+// const events = require("events")
+// let ev = new events.EventEmitter()
 
 // 1.监听||注册事件(接受数据) 
 ev.on("msg", function(a, b, c){
