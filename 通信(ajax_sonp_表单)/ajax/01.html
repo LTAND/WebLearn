@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="ajax.js"></script>
+  <title>Document</title>
+</head>
+
+<body>
+  <button onclick="sendNodejs">请求node服务的数据</button>
+</body>
+<script>
+  function sendNodejs(){
+    Ajax({
+      url:"http://localhost:8888",
+      success(res){
+        console.log(res)
+      }
+    })
+  }  
+  
+</script>
+</html>

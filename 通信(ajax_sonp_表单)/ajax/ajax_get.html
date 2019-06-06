@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <button onclick="sendAjax()">发送请求</button>
+</body>
+
+<script>
+  function sendAjax() {
+    let xhr = null
+    // xhr兼容
+    if (window.XMLHttpRequest) { // Mozilla, Safari, IE7+ ...
+      xhr = new XMLHttpRequest()
+    } else if (window.ActiveXObject) { // IE6 and older
+      xhr = new ActiveXObject("Microsoft.XMLHTTP") // 调用IE的插件
+    } else {
+      console.log("Ajax: have not create xhr!")
+    }
+
+    // 1- 连接
+    xhr.open("GET", "1_get.php?a=1&b=2", true) // 异步 - true | 同步 - false 
+
+    // 发送消息主体(body)
+    xhr.send()
+    // console.log(xhr.readyState) // 1
+
+    // 接受
+    xhr.onreadystatechange = function () {
+      try { // 在通信错误的事件中（例如服务器宕机），在访问响应状态 onreadystatechange 方法中会抛出一个例外。
+        /**
+         * 2 - 加载成功
+         * 3 - 交互
+        */
+        if (xhr.readyState === 4) { // 4 - 完成 
+          if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304) {
+            console.log("响应：", xhr.responseText)
+          } else {
+            alert("请求失败", xhr.status)
+          }
+        }
+      } catch (e) {
+        alert('Caught Exception: ' + e.description);
+      }
+    }
+  }
+
+  /*
+    0 (未初始化) or (请求还未初始化)
+    1 (正在加载) or (已建立服务器链接)
+    2 (加载成功) or (请求已接受)
+    3 (交互) or (正在处理请求)
+    4 (完成) or (请求已完成并且响应已准备好)
+  */
+
+</script>
+
+</html>

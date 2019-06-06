@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="jquery-3.4.1.min.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  用户名: <input type="text" name="user"><br>
+  密  码: <input type="text" name="pass"><br>
+  <button onclick="sendReg()">注册</button><button onclick="sendLogin">登录</button>
+</body>
+  <script>
+    function sendReg(){
+      let user = document.getElementsByName("user")[0].value
+      let pass = document.getElementsByName("pass")[0].value
+      // console.log(document.getElementsByName("user")[0].value, pass)
+      $.ajax({
+        method: "GET",
+        url: "/reg",
+        data: {
+          user,
+          pass
+        },
+        success:function(data){
+          if(data.err){
+            console.log(data.msg)
+          }else{
+            console.log(data)
+          }
+        },
+      })
+
+    }
+  </script>
+</html>

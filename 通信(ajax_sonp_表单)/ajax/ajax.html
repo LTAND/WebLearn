@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="ajax.js"></script>
+  <title>ajax</title>
+</head>
+
+<body>
+  <button onclick="send()">发送</button>
+</body>
+
+<script>
+  function send() {
+    Ajax(
+      {
+        method: "GET",
+        url: "1_get.php",
+        dataType: "text",
+        data: { a: 1, b: 2 },
+        success(res) {
+          // 响应数据
+          console.log(res)
+        },
+        err: function (err) {
+          console.log(err)
+        }
+      }
+    )
+  }
+</script>
+
+</html>

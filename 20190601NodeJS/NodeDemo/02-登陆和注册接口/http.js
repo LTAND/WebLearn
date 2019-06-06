@@ -11,7 +11,7 @@ let users = {
 let server = http.createServer((req, res) => {
   // GET
   let { pathname, query } = url.parse(req.url, true)
-
+  console.log(url.parse(req.url, true))
   // POST
   let [str, post] = ["", ""]
   req.on("data", (data) => {
@@ -75,4 +75,4 @@ let server = http.createServer((req, res) => {
 
 })
 
-server.listen(8080)
+server.listen(8081)
