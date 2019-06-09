@@ -32,7 +32,7 @@ let server = http.createServer((req, res) => {
         res.write('{ "err": 1, "msg": "invaild username" }')  // 用户名长度在8-32
       } else if (!pass) {
         res.write('{ "err": 1, "msg": "password is required"}');
-      } else if (!/^['|"]$/.test(pass)){
+      } else if (!/['|"]$/.test(pass)){
         res.write('{ "err": 1, "msg": "invaild passwrold" }')
       }else if (users[user]){
         res.write('{ "err": 1, "msg": "username already exsits"}');
