@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>02_聊天室</title>
+  <style>
+    #uli{
+      width: 400px;
+      height: 350px;
+      border: 1px black solid;
+    }
+    #err_div{
+      color: red;
+      display: none;
+    }
+    .me{
+      color: green;
+    }
+  </style>
+  <script src="http://localhost:8080/socket.io/socket.io.js" charset="utf-8"></script>
+  <script>
+    let sock = io.connect('ws://localhost:8080/')
+
+    
+    sock.on("connect", ()=>{
+      console.log("已连接服务器")
+      document.getElementById("err_div").style.display = "none"
+    })
+
+    sock.on("disconnect", ()=>{
+      console.log("服务器断开连接")
+       document.getElementById("err_div").style.display="block"
+    })
+
+    // 聊天室
+    window.onload = function(){
+
+      let oTxt = document.getElementById("atext")
+      let oBtn = document.getElementById("btn")
+      let oUl = document.getElementById("uli")
+
+      oBtn.onclick = function(){
+        sock.emit("msg", oTxt.value) // 发送信息给服务器
+
+        let oLi = document.createElement("li")
+        oLi.innerHTML = oTxt.value
+
+        oLi.className = "me"
+        oTxt.value = ""
+        oUl.appendChild(oLi) 
+      }
+      
+      sock.on("response", str=>{
+        // 监听接收服务器发来的信息
+
+        let oLi = document.createElement("li")
+        oLi.innerHTML = str
+
+        oTxt.value =""
+    
+        oUl.appendChild(oLi)
+
+     }) 
+    }
+  </script>
+</head>
+<body>
+  <div id="err_div">服务器连接失败</div>
+  <ul id="uli"></ul>
+  <textarea id="atext" cols="60" rows="10"></textarea>
+  <button id="btn">发送</button>
+</body>
+</html>
