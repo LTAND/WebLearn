@@ -50,13 +50,25 @@ let server = net.createServer(sock => {
       console.log("hand shake end")
     }
 
-    // 客户端断开了
-    sock.on("end", () => {
-      console.log("客户端已断开")
+    // 真正数据
+    sock.on('data', (data) => {
+      console.log("有数据")
+      // 数据帧
+      let FIN = data[0] & 0x001;
+      let opcode = data[0] & 0x0F0;
+      let mask = data[1] & 0x001;
+      let payload = data[1] & 0x0FE;
+      
+      console.log(`FIN: ${FIN}, opcode: ${opcode}, mask: ${mask}, payload: ${payload}`)
     })
+
 
   })
 
+  // 客户端断开了
+  sock.on("end", () => {
+    console.log("客户端已断开\n")
+  })
 })
 
 server.listen(8080)
