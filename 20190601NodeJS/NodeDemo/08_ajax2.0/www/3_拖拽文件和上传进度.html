@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    #box {
+      width: 300px;
+      height: 300px;
+      margin: 50px auto 0 auto;
+      text-align: center;
+      background: #cccccc;
+      line-height: 300px;
+    }
+    #parent{
+      width: 400px;
+      height: 20px;
+      border: 1px solid #cccccc;
+    }
+    #child{
+      width: 0;
+      height: 100%;
+      background: green; 
+    }
+  </style>
+</head>
+
+<body>
+  <div id="box">
+    请拖拽文件
+  </div>
+  <!-- <progress id="pg" value="0" min="0" max="100"></progress> -->
+  <div id="parent">
+    <div id="child"></div>
+  </div>
+</body>
+<script>
+  window.onload = function () {
+    let oBox = document.getElementById("box")
+
+    oBox.ondragenter = function () {
+      // 拖拽进入
+      oBox.innerHTML = "松手上传"
+
+    }
+
+    oBox.ondragleave = function () {
+      // 拖拽离开
+      oBox.innerHTML = "请拖拽文件"
+    }
+
+    oBox.ondragover = function () {
+      // 拖拽悬停
+      return false  // 阻止默认行为
+    }
+    
+    oBox.ondrop = function (ev) {
+      // 松手 
+      // alert("松手")
+      let data = new FormData()
+      const Files = ev.dataTransfer.files
+   
+      Array.from(Files).forEach(file => {
+        data.append("f1", file)
+      })
+      
+      let xhr = new XMLHttpRequest()
+      xhr.open("POST", "http://localhost:8080/api", true)
+
+      // h5进度条
+      // xhr.upload.onprogress = function(ev){
+      //   let oPg = document.getElementById("pg")
+      //   oPg.value = 100*ev.loaded / ev.total
+      // }
+
+      // 自定义进度条
+      xhr.upload.onprogress = function(ev){
+        let oChild = document.getElementById("child")
+        oChild.style.width = 100*ev.loaded / ev.total+"%"
+        console.log(oChild.style.width)
+      }
+
+      xhr.send(data)
+
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4) {
+          if (xhr.status == 200 && xhr.status < 300 || xhr.status == 304) {
+            oBox.innerHTML = "上传成功"
+          } else {
+            oBox.innerHTML = "上传失败"
+          }
+        }
+      }
+      return false  // 阻止默认行为
+    }
+  }
+</script>
+
+</html>
