@@ -39,7 +39,7 @@
         
         // POST
         xhr.open("POST", `/api`, true)
-        // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // 客户端以这种形式提交数据
+        // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // ajax2.0无需设置请求头
         xhr.send(formData)
         
         xhr.onreadystatechange = function(){

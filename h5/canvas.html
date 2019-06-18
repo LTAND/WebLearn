@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+  #cav{
+    background-color: brown;
+  }
+  </style>
+</head>
+<body>
+  <canvas id="canvas" width="400px" height="400px"></canvas>
+</body>
+
+<script>
+  window.onload = function(){
+    let canvas = document.getElementById("canvas")
+    let ctx = null
+
+    if(canvas.getContext){
+      ctx = canvas.getContext("2d")
+    }else{
+      alert("当前浏览器不支持canvas")
+      return
+    }
+
+    ctx.beginPath()
+    ctx.moveTo(75, 50)
+    ctx.lineTo(100, 75)
+    ctx.lineTo(100, 25)
+    ctx.closePath()
+    
+    ctx.stroke() // 描边
+    
+    // ctx.fill() // 填充
+
+  }
+</script>
+
+</html>

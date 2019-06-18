@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    #box {
+      width: 300px;
+      height: 300px;
+      margin: 50px auto 0 auto;
+      text-align: center;
+      background: #cccccc;
+      line-height: 300px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="box">
+    请拖拽文件
+  </div>
+</body>
+<script>
+  window.onload = function () {
+    let oBox = document.getElementById("box")
+
+    oBox.ondragenter = function () {
+      // 拖拽进入
+      oBox.innerHTML = "松手上传"
+
+    }
+
+    oBox.ondragleave = function () {
+      // 拖拽离开
+      oBox.innerHTML = "请拖拽文件"
+    }
+
+    oBox.ondragover = function () {
+      // 拖拽悬停
+      return false  // 阻止默认行为
+    }
+
+    oBox.addEventListener("drop", function (ev) {
+      // 松手 
+      // alert("松手")
+
+      let data = new FormData()
+      let Files = ev.dataTransfer.files
+
+      Array.from(Files).forEach(file => {
+        data.append("f1", file)
+      })
+
+      // 读取上传文件
+      let reader = new FileReader()
+      reader.onload = function(){
+        // 读取完成事件 后执行
+        console.log(reader.result) // 读取结果
+      }
+      reader.readAsDataURL(Files[0])   // base64
+
+      // 发起上传请求
+      let xhr = new XMLHttpRequest()
+      xhr.open("POST", "http://localhost:8080/api", true)
+      xhr.send(data)
+
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4) {
+          if (xhr.status == 200 && xhr.status < 300 || xhr.status == 304) {
+            oBox.innerHTML = "上传成功"
+          } else {
+            oBox.innerHTML = "上传失败"
+          }
+        }
+      }
+      ev.preventDefault ? ev.preventDefault() : ev.returnValue = false  // 阻止默认行为 
+    }, false)
+  }
+</script>
+
+</html>
