@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="bscroll.min.js"></script>
+  <style>
+    *{
+      padding: 0;
+      margin: 0;
+    }
+    #wrapper{
+      width: 350px;
+      height: 400px;
+      margin: 50px auto 0 auto;
+      border: 1px solid black;
+      overflow: hidden;
+    }
+    #content-wrapper{
+      position: relative;
+    }
+    #pullup{
+      text-align: center;
+      position: absolute;
+      top: -50px;
+      left: 0;
+      right: 0;
+    }
+    #pulldown{
+      text-align: center;
+      position: absolute;
+      bottom: -40px;
+      left: 0;
+      right: 0;      
+    }
+  </style>
+</head>
+<body>
+  <div id="wrapper">
+    <div id="content-wrapper">
+      <div id="pullup">上拉刷新</div>
+      <div class="content">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur harum optio non nam neque iure placeat. Autnecessitatibus sint accusantium eaque molestias? Nostrum voluptatum culpa beatae, placeat distinctio voluptatem. Ea.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat perspiciatis incidunt, neque maxime architecto quae sapiente ad nam eius nisi. Minus, vel hic culpa praesentium exercitationem ullam architecto dolor iure.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti repellat pariatur voluptas modi magnam ipsum accusantium obcaecati dignissimos, tempora expedita eum iusto? Facilis ducimus cum officiis sint itaque, at harum.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti repellat pariatur voluptas modi magnam ipsum accusantium obcaecati dignissimos, tempora expedita eum iusto? Facilis ducimus cum officiis sint itaque, at harum.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti repellat pariatur voluptas modi magnam ipsum accusantium obcaecati dignissimos, tempora expedita eum iusto? Facilis ducimus cum officiis sint itaque, at harum.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti repellat pariatur voluptas modi magnam ipsum accusantium obcaecati dignissimos, tempora expedita eum iusto? Facilis ducimus cum officiis sint itaque, at harum.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti repellat pariatur voluptas modi magnam ipsum accusantium obcaecati dignissimos, tempora expedita eum iusto? Facilis ducimus cum officiis sint itaque, at harum.</p>
+      </div>
+      <div id="pulldown">下拉刷新</div>
+    </div>
+  </div>
+</body>
+
+<script>
+  let scroll = new BScroll("#wrapper", { probeType: 1, scrollY: true})
+
+  scroll.on("scroll", function(){
+    if(scroll.y >= 50){
+      document.getElementById("pullup").innerHTML ="松手刷新"
+    }else if(scroll.y <= -50){
+      document.getElementById("pulldown").innerHTML = "加载更多"
+    }
+    console.log(scroll.y);
+  })
+
+
+</script>
+
+</html>
