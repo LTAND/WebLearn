@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+<script>
+  var a = 10
+  
+  function test_1(){
+    console.log("test_1",a) 
+    var a = 20
+    alert(a) // 20
+  }
+  console.log("函数局部变量会回收", a) // 10 
+  
+  var b = 10
+  function test_2(){
+    var b = 20
+    console.log("test_2", b)
+  }
+
+  function test_3(){
+    b = 20000
+    console.log("test_3", b)
+  }
+
+  
+  test_1() // undefined
+  test_2() // 20
+  test_3() // 20000
+
+  console.log("最后的b的变量", b)  // 函数里面变量未用var定义，会自动变化全局变量，污染全局变量
+  
+</script>
+</html>

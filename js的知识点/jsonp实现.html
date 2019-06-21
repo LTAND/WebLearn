@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script>
+    (function creatScript(){
+      // 动态加入josnp, 或者body后面自己加入
+      let script = document.createElement("script")
+      script.src="jsonp.js"
+      document.getElementsByTagName('head')[0].appendChild(script);
+    }());
+
+    let callback = function (data) {
+      console.log(data)
+    }
+  </script>
+</head>
+<body>
+  
+</body>
+  <!-- <script src="jsonp.js"></script> -->
+</html>

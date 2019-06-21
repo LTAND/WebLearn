@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  // 实例1 var 只有函数作用域,没有块级作用域，全局变量会容易被外部访问修改
+  for(var i = 0;i<5;i++){
+    console.log(i)
+  }
+  alert(i) // 5
+  
+  
+  // 实例2 ES6 let替代var起到块级作用域
+  for(let a =0;a<5;a++){
+    console.log(a)
+  }
+  alert(a) // 报错，提示变量a未定义
+
+
+  // 实例3 闭包是以函数作用域的形式营造块级作用域的效果
+  function f1() {
+    return function f2() {
+      for (var i = 0; i < 5; i++) {
+        console.log(i)
+      }
+    }
+  }
+  f1()()
+  alert(i) // 报错，提示变量i未定义
+
+  // IIEF-立即调用函数表达式
+  // (function () {
+  //   return function f2() {
+  //     for (var i = 0; i < 5; i++) {
+  //       console.log(i)
+  //     }
+  //   }
+  // }()());
+  // alert(i) // 报错，提示变量i未定义
+
+
+
+</script>
+
+</html>

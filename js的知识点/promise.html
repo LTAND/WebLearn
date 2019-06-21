@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  // 第一种
+  const p1 = new Promise((resolve, reject) => {
+    try {
+      throw new Error("test")
+    }catch(e){
+      reject(e)
+    }
+  })
+  p1.catch(function(error){
+    console.log(error)
+  })
+
+  // 第二种
+  const p2 = new Promise(function (resolve, reject) { 
+    reject(new Error("test")) 
+  })
+  p2.catch(function (error) { console.log(error) })
+
+</script>
+
+</html>

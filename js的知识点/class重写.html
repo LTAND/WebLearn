@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+<script>
+class Person{
+  constructor(name, age){
+    this.name = name
+    this.age = name 
+  }
+  showMyself(){
+    alert(`我是${this.name}，今年${this.age}岁`)
+  }
+}
+
+class Worker extends Person{
+  constructor(name, age, job){
+    super(name, age)
+    this.job = 111
+  }
+  findJob(){
+    // 调用父类方法
+    super.showMyself()
+  }
+  showMyself(){
+    // 重写父类
+    alert(`我是${this.name}，今年${this.age}岁, ,mywork: ${this.job}`)
+  }
+}
+
+const w = new Worker('blue', 16, "job")
+w.findJob()
+</script>
+</html>

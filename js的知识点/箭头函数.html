@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  let add_case_1 = function (a, b) {
+    return a + b
+  }
+  alert(add_case_1(1, 1)) // 2 
+
+
+  // 箭头函数
+  let add_case_2 = (a, b) => {
+    return a + b
+  }
+
+  let add_case_3 = (a, b) => a + b
+
+  let add_case_4 = a => a + 5
+
+  // 拓展参数
+  function add(a, b, c, ...args) {
+    console.log(a, b, c, args)
+    console.log("解构数组",a, b, c, ...args)
+  }
+  add(10, 20, 30, 40, 6, 6)
+</script>
+
+</html>

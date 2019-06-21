@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  let fun = function () {
+    console.log(this) // window
+  }
+  fun() // 通常window是省略的，全局变量
+  console.log(fun)
+
+  let obj = {
+    a_obj: {
+      name: "a",
+      fun: function () {
+        console.log(this) // a_obj
+      }
+    },
+    name:"obj",
+    fun: function(){
+      console.log("obj.fun():", this) // obj
+    }
+  }
+  obj.fun()
+  obj.a.fun()
+</script>
+
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  // 实例1
+  function show(callback) {
+    let a = "test"
+    callback && callback(a) // 参数有传递函数时，才执行
+  }
+
+  show(
+    function test(abc) {
+      // 由外部负责处理数据
+      console.log(abc)
+    }
+  )
+
+  // 实例2
+  function Ajax(options) {
+    let a = { err: 0, msg: "success" }
+    let b = { err: 1, msg: "err" }
+
+    options.success && options.success(a)
+    options.err && options.err(b)
+  }
+
+  Ajax({
+    success(data) {
+      console.log(data)
+    },
+    err(err){
+      console.log(err)
+    }
+  })
+</script>
+
+</html>

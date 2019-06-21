@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+<script>
+// 构造函数
+function Person(name,age){
+  this.name = name;
+  this.age = age
+  this.playFun = function(){
+    console.log(`name ${this.name}, age ${this.age}`)
+  }
+}
+let p1 = new Person("p1","11")
+let p2 = new Person("p2","12")
+p1.age = "111111111111"
+p1.playFun()
+p2.playFun()
+
+
+// 原型
+function Animal(){}
+Animal.prototype.name = "animal"
+Animal.prototype.playFun = function(){
+  console.log(this.name)
+}
+
+let a1 = new Animal()
+let a2 = new Animal()
+a1.name = "a1"
+a1.playFun() // 优先返回存在的实例属性
+a2.playFun()
+
+let arr = []
+console.log(Animal.prototype.constructor)
+// a1.constructor.prototype重新赋予新的引用地址
+Animal.prototype = {name:"animal", playFun: function () {
+  console.log(this.name)
+}}
+console.log(Animal.prototype.constructor)
+
+
+// 组合继承
+// 属性用构造函数实现
+// 方法用原型实现
+function People(name, age){
+  this.name = name
+  this.age = age
+}
+People.prototype.funPlay = function(){
+  console.log("my name is", this.name)
+} 
+
+let pp = new People("Aexl", 18)
+pp.funPlay()
+
+</script>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <button id="btn_normal">普通函数</button>
+  <button id="btn_row">箭头函数</button>
+  <button id="btn_row_2">封装箭头函数</button>
+</body>
+<script>
+  const btnRow = document.getElementById("btn_row")
+  const btnNormal = document.getElementById("btn_normal")
+  const btnRow2 = document.getElementById("btn_row_2")
+
+  btnNormal.onclick = function () {
+    console.log("普通函数的指向:", this)
+  }
+
+  btnRow.onclick = () => {
+    console.log("箭头函数的指向:", this)  // 指向外部环境window
+  }
+
+  btnRow2.onclick = function (){
+    
+    (() => {
+      console.log("封装箭头函数的指向:", this)  // 指向外部环境btnRow2
+    })()
+  }
+</script>
+
+</html>
