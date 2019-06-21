@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    #box {
+      width: 100px;
+      height: 100px;
+      background: #333333;
+      margin: 20px auto;
+      transform: rotate(0deg)
+    }
+  </style>
+</head>
+
+<body>
+  <div id="box"></div>
+</body>
+<script>
+
+  window.onload = function () {
+    let oBox = document.getElementById('box')
+    let ang1, ang2
+    let new_ang = 0, old_ang
+
+    function callDeg(touch1, touch2) {
+      let disX = touch1.clientX - touch2.clientX;
+      let disY = touch1.clientY - touch2.clientY;
+      return Math.atan2(disY, disX) * Math.PI / 180
+    }
+
+    oBox.addEventListener("touchstart", function (ev) {
+      if (ev.targetTouches.length >= 2) {
+        ang1 = callDeg(ev.targetTouches[0], ev.targetTouches[1])
+        old_deg = new_ang
+      }
+    }, false)
+
+    oBox.addEventListener("touchmove", function (ev) {
+      if (ev.targetTouches.length >= 2) {
+        ang2 = callDeg(ev.targetTouches[0], ev.targetTouches[1]) + old_deg
+        
+        new_ang = old_ang + ang2 -ang1
+
+        oBox.style.transform = `rotate(${new_ang}deg)`
+      }
+    }, false)
+
+  }
+</script>
+
+</html>

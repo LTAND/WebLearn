@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    #box {
+      width: 100px;
+      height: 100px;
+      background: #333333;
+      margin: 20px auto;
+      transform: scale(1)
+    }
+  </style>
+</head>
+
+<body>
+  <div id="box"></div>
+</body>
+<script>
+  window.onload = function () {
+    let oBox = document.getElementById("box")
+    let dis1, dis2
+    let old_scale = 1, new_scale
+
+    function callScaleDis(touch1, touch2) {
+      let disX = touch1.clientX - touch2.clientX
+      let disY = touch1.clientY - touch2.clientY
+
+      return Math.sqrt(Math.pow(disX) + Math.pow(disY))
+    }
+
+    oBox.addEventListener("touchstart", function (ev) {
+      if (ev.targetTouches.length >= 2) {
+
+        dis1 = callScaleDis(ev.targetTouches[0], ev.targetTouches[1])
+
+        new_scale = old_scale
+      }
+    }, false)
+
+    oBox.addEventListener("touchmove", function (ev) {
+      if (ev.targetTouches.length >= 2) {
+        dis2 = callScaleDis(ev.targetTouches[0], ev.targetTouches[1])
+
+        new_scale = old_scale * dis1 / dis2
+
+        oBox.style.transform = `scale(${new_scale})`
+      }
+    }, false)
+
+  }
+</script>
+
+</html>
