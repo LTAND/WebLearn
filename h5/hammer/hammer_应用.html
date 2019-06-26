@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="hammer.min.js"></script>
+  <title>Document</title>
+  <style>
+    *{
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+    #oUl{
+      width: 100%;
+    }
+    #oUl li{
+      width: 95%;     
+      padding: 2px;
+      height: 20px;
+    }
+    #oUl li span.text{
+      width: 90%;
+    }
+    #oUl li span.delete{
+      float: right;
+      text-align: center;
+      width: 10%;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <ul id="oUl"></ul>
+</body>
+<script>
+  window.onload = function(){
+    let oUL = document.getElementById("oUl")
+
+    data = [
+      "11111111111111",
+      "22222222222222",
+      "33333333333333",
+      "qweq333333qweq",
+      "qweqwe444eqweq",
+      "qweqweqw55qweq",
+      "qweqweqwe66weq"
+    ]
+
+    // 初始创建
+    data.forEach((ele,index) => {
+      let oLi = document.createElement("li")
+      oLi.innerHTML = `<span class="text">${ele}</span><span class="delete">删除</span>`
+      oUL.appendChild(oLi)
+    });
+
+    let hammer = new Hammer(oUL)
+    let deletes = document.getElementsByClassName("delete")
+
+    // 左滑显示
+    hammer.on("swipeleft", ev=>{
+      Array.from(deletes).forEach(ele=>{
+        ele.style.display = "none"
+      })
+
+      ev.target.getElementsByClassName("delete")[0].style.display = "block"
+    })
+
+    // 右滑隐藏
+    hammer.on("swiperight", ev=>{
+      Array.from(deletes).forEach(ele => {
+        ele.style.display = "none"
+      })
+    })
+
+    // 点击删除
+    Array.from(deletes).forEach(ele => {
+      ele.onclick = function(ev){
+        ev.target.parentNode.remove()
+      }
+    })
+
+    // 删除标记
+  }
+</script>
+</html>

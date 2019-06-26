@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+  </style>
+</head>
+
+<body>
+  <canvas id="canvas" width="800" height="600" background="#ccc"></canvas>
+</body>
+<script>
+  window.onload = function () {
+    let canvas = document.getElementById("canvas")
+    let ctx = canvas.getContext("2d")
+    let left = 50
+
+    // 帧
+    // webkitRequestAnimationFrame(next)
+    // function next(){
+    //   ctx.clearRect(0, 0, canvas.width, canvas.height)
+    //   left += 5
+    //   ctx.strokeRect(left, 50, 100, 200)
+    //   webkitRequestAnimationFrame(next)
+    // }
+
+    // 定时器
+    // setInterval(function(){
+    //   left+=10
+    //   ctx.clearRect(0,0, canvas.width, canvas.height)
+    //   ctx.strokeRect(left, 50, 100, 200)
+    // },20)
+
+    // 判断鼠标是否在矩形内
+    canvas.onmousemove = function (ev) {
+      let l = 100, r = l + 200
+      let t = 100, b = t + 150
+      let x = ev.offsetX, y = ev.offsetY // ev.clientY - canvas.offsetTop
+      ctx.clearRect(0, 0, canvas.width, canvas.heght)
+
+      if (l <= x && x <= r && t <= y && y <= b) {
+        // 鼠标在矩形区域内
+        ctx.strokeStyle = "red"
+      } else {
+        ctx.strokeStyle = "blue"
+      }
+      console.log(ev)
+      ctx.strokeRect(100, 100, 200, 150)
+    }
+  }
+
+</script>
+
+</html>
