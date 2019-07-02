@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="jquery-3.4.1.min.js"></script>
+  <script>
+    function loadResource(path) {
+      return new Promise((resolve, reject) => {
+        $.ajax({
+          url: "img/" + path,
+          dataType: "json",
+          success(res) {
+            resolve(res)
+          },
+          error(err) {
+            reject(err)
+          }
+        })
+      })
+    }
+  </script>
+</head>
+
+<body>
+  <div class="box"></div>
+</body>
+<script>
+  import Spirit from "Spirit.js"
+  window.onload = async function () {
+    await loadResource("fish.json").then(res => {
+      console.log(res)
+    }).catch(err => {
+      console.log(err);
+    })
+  }
+</script>
+
+</html>

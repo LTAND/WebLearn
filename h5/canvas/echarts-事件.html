@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>echarts事件</title>
+  <script src="echarts-en.common.js"></script>
+</head>
+
+<body>
+
+  <body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main_1" style="width: 600px;height:400px;"></div>
+    <div id="main_2" style="width: 600px;height:400px;"></div>
+
+    <script type="text/javascript">
+      function series(name) {
+        let curdata = null
+
+        data2.forEach(ele => {
+          if (ele.name == name) {
+            curdata = ele.datas
+          }
+        })
+        return curdata
+      }
+
+      let data2 = [
+        { name: 'A', datas: [{ name: "A1", value: 2000 }, { name: "A2", value: 2000 }, { name: "A3", value: 3000 }] },
+        { name: 'B', datas: [{ name: "B1", value: 1212 }, { name: "B2", value: 2188 }, { name: "B3", value: 2648 }] },
+        { name: 'C', datas: [{ name: "C1", value: 1212 }, { name: "C2", value: 2188 }, { name: "C3", value: 2648 }] }
+      ]
+
+      // 基于准备好的dom，初始化echarts实例
+      let myChart = echarts.init(document.getElementById('main_1'));
+      let myChart2 = echarts.init(document.getElementById('main_2'))
+
+      let config = {
+        title: {
+          text: '222'
+        },
+        series: {
+          type: 'pie',
+          data: data2[0].datas
+        }
+      }
+
+      let option = {
+        title: {
+          text: 'ECharts 入门示例'
+        },
+        series: {
+          type: 'pie',
+          data: [
+            { name: 'A', value: 1212 },
+            { name: 'B', value: 2323 },
+            { name: 'C', value: 1919 }
+          ]
+        }
+      };
+
+      myChart.setOption(option);
+      myChart2.setOption(config);
+
+      myChart.on("click", function (ev) {
+        // 点击显示另外图表
+        config.series["data"] = series(ev.name)
+        myChart2.setOption(config);
+      })
+
+    </script>
+  </body>
+</body>
+
+</html>
