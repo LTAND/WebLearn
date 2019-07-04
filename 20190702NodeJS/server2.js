@@ -11,9 +11,8 @@ const server = http.createServer((req, res)=>{
   req.on("end", ()=>{
     let buffer = Buffer.concat(arr)
     let post = qs.parse(buffer.toString())
-    console.log('post :', post);
+    console.log('post:', post);
   })
-
 
 })
 server.listen(8080)

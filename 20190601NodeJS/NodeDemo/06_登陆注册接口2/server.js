@@ -19,7 +19,7 @@ function md5_2(str){
 }
 
 let server = http.createServer((req, res)=>{
-  let db = mysql.createPool({ host: "localhost", port: 3306, user: "root", password: "", database:"student"})
+  let db = mysql.createPool()
 
   let { pathname, query } = url.parse(req.url, true) // GET
   let { user, pass } = query
